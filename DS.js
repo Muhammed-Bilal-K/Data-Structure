@@ -57,6 +57,7 @@
 
 // const lt = new LinkedList();
 // lt.insertFirst(100);
+// lt.insertFirst(200);
 
 // console.log(lt);
 
@@ -382,17 +383,17 @@ class Node {
 }
 
 class LinkedList {
-    constructor() {
+    constructor() {     
         this.head = null;
         this.size = 0;
     }
     //INSERT FIRST NODE
-    insertFirst(data) {
+    insertFirst(data) {    ////////////////////////////
         this.head = new Node(data, this.head);
         this.size++;
     }
     //PRINT THE ALL DATA
-    printListData() {
+    printListData() {      ///////////////////////////
         let current = this.head;
 
         while (current) {
@@ -401,7 +402,7 @@ class LinkedList {
         }
     }
     //INSERT LAST NODE
-    insertLast(data) {
+    insertLast(data) {  /////////////////////////////////////////
         let node = new Node(data);
         let current;
 
@@ -418,38 +419,8 @@ class LinkedList {
         }
         this.size++;
     }
-    //INSERT DATA
-    insertAt(data, index) {
-        //if index is out of range
-        if (index > 0 && index > this.size) {
-            return;
-        }
-        //if first index
-        if (index === 0) {
-            this.head = new Node(data, this.head);
-            return;
-        }
-
-        const node = new Node(data);
-        let current, previous;
-
-        //set current to first
-        current = this.head;
-        let count = 0;
-
-        while (count < index) {
-            previous = current //node before index
-            count++
-            current = current.next //node after index
-        }
-
-        node.next = current;
-        previous.next = node;
-
-        this.size++;
-    }
     //GET INDEX DATA
-    getAt(index) {
+    getAt(index) {    ////////////////////////////////////
         let current = this.head;
         let count = 0;
 
@@ -462,8 +433,33 @@ class LinkedList {
         }
         return null;
     }
+    //INSERT AT INDEX
+    insertAt(data, index) {   ///////////////////////////////////////
+        //if index is out of range
+        if (index > 0 && index > this.size) {
+            return;
+        }
+        //if first index
+        if (index === 0) {
+            this.head = new Node(data, this.head);
+            return;
+        }
+        const node = new Node(data);
+        let current, previous;
+        //set current to first
+        current = this.head;
+        let count = 0;
+        while (count < index) {
+            previous = current //node before index
+            count++
+            current = current.next //node after index
+        }
+        node.next = current;
+        previous.next = node;
+        this.size++;
+    }
     //REMOVE AT INDEX
-    removeAt(index) {
+    removeAt(index) {     ///////////////////////////////////////////////
         if (index > 0 && index > this.size) {
             return;
         }
@@ -475,7 +471,7 @@ class LinkedList {
         //remove first
         if (index === 0) {
             this.head = current.next;
-        }else{
+        } else {
             while (count < index) {
                 count++;
                 previous = current;
@@ -485,11 +481,72 @@ class LinkedList {
         }
         this.size--;
     }
+    //SEARCH 
+    searchData(data) {
+        let current = this.head;
+
+        while (current) {
+            if (current.data === data) {
+                console.log(`data found at ${data}`);
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    removeData(data) {
+        let current = this.head;
+        let prev = null;
+
+        while (current) {
+            if (current.data === data) {
+                if (prev === null) {
+                    this.head = current.next;
+                } else {
+                    prev.next = current.next;
+                }
+                this.size--;
+                return true;
+            }
+            prev = current;
+            current = current.next;
+        }
+        return false;
+    }
+
+    removeDuplicate(){
+        let current = this.head;
+        while(current){
+            let runner = current;
+            while (runner.next) {
+                if (runner.next.data === current.data) {
+                    runner.next = runner.next.next;
+                    this.size--;
+                }else{
+                    runner = runner.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+
+    // reverseData(){
+    //     let current = this.head;
+    //     let prev = null;
+    //     while (current.next) {
+    //         const nextnode = current.next;
+    //         current.next = prev;
+    //         prev = current
+    //         current = nextnode;
+    //     }
+    // }
+
 
     //CLEAR LINKED LIST
-    clearList(){
-        this.head=null;
-        this.size=0;
+    clearList() {
+        this.head = null;
+        this.size = 0;
     }
 }
 
@@ -498,10 +555,15 @@ const lt = new LinkedList();
 lt.insertFirst(100);
 lt.insertFirst(200);
 lt.insertFirst(300);
-lt.insertLast(400);
-lt.removeAt(2);
+lt.insertFirst(300);
+lt.removeDuplicate();
+// lt.insertLast(400);
+// lt.removeData(100);
+// lt.reverseData();
+// lt.removeAt(2);
+// lt.searchData(200);
 // lt.insertAt(500,2);
 // lt.getAt(2)
 // console.log(lt);
-lt.clearList();
+// lt.clearList();
 lt.printListData();
