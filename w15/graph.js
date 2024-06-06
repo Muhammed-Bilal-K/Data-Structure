@@ -75,7 +75,7 @@ class graph {
         let datas = this.adjacentList[startNode];
         for (const data of datas) {
             if (!visited.has(data)) {
-                visited.add(data);
+                this.dfs(data,visited)
             }
         }
     }
@@ -91,7 +91,7 @@ g.addvertex('d');
 // console.log(g.hasEdge('a', 'b'));
 // g.removeEdge('a', 'b');
 // g.removeVertex('d');
-g.display();
-g.bfs('a');
+// g.display();
+// g.bfs('a');
 g.dfs('a');
 
