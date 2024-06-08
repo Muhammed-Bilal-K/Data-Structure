@@ -108,11 +108,15 @@ class Trie {
 
 }
 
+
 let tries = new Trie();
-tries.insert("appledddd");
-tries.insert("appledata");
-tries.insert("applemon");
+tries.insert("a");
+tries.insert("b");
+tries.insert("ab");
+// tries.insert("appledddd");
+// tries.insert("appledata");
+// tries.insert("applemon");
 // tries.delete("apple");
 // console.log(tries.contains("apple"));
-
-console.log(tries.searchPrefix("app"));
+console.log(tries.root);
+// console.log(tries.searchPrefix("app"));
