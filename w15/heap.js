@@ -109,10 +109,8 @@ class Heap{
     }
 
     remove(){
-        let removeData = this.root[0];
         this.root[0] = this.root.pop();
         this.heapifyDown();
-        return removeData;
     }
 
     heapifyDown(){
